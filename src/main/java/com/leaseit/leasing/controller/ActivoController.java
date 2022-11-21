@@ -39,8 +39,9 @@ public class ActivoController {
     public ResponseEntity<Activo> createActivo(@RequestBody Activo activo){
         Activo newActivo= activoRepository.save(
                 new Activo(
-                        activo.getTipo(),
-                        activo.getId()));
+                        activo.getNombre(),
+                        activo.getPrecio(),
+                        activo.getPrecio()));
         return new ResponseEntity<Activo>(newActivo,HttpStatus.CREATED);
     }
     //PUT=>http:localthost:8080/api/users/1
@@ -51,8 +52,9 @@ public class ActivoController {
         Activo activoUpdate= activoRepository.findById(id)
                 .orElseThrow(()-> new ResourceNotFoundException("Not found post with id="+id));
 
-        activoUpdate.setTipo(activo.getTipo());
+        activoUpdate.setNombre(activo.getNombre());
         activoUpdate.setPrecio(activo.getPrecio());
+        activoUpdate.setG_inicial(activo.getG_inicial());
         return new ResponseEntity<Activo>(activoRepository.save(activoUpdate),
                 HttpStatus.OK);
     }

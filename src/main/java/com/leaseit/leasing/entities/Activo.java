@@ -10,18 +10,30 @@ public class Activo {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "tipo")
-    private String tipo;
+    @Column(name = "nombre")
+    private String nombre;
 
     @Column(name = "precio")
     private Long precio;
 
+    @Column(name = "g_inicial")
+    private Long g_inicial;
+
     public Activo(){
     }
 
-    public Activo(String tipo, Long precio) {
-        this.tipo = tipo;
+    public Long getG_inicial() {
+        return g_inicial;
+    }
+
+    public void setG_inicial(Long g_inicial) {
+        this.g_inicial = g_inicial;
+    }
+
+    public Activo(String nombre, Long precio, Long g_inicial) {
+        this.nombre = nombre;
         this.precio = precio;
+        this.g_inicial=g_inicial;
     }
 
     public Long getId() {
@@ -32,12 +44,12 @@ public class Activo {
         this.id = id;
     }
 
-    public String getTipo() {
-        return tipo;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
     }
 
     public Long getPrecio() {
@@ -52,9 +64,9 @@ public class Activo {
     public String toString() {
         return "Activo{" +
                 "id=" + id +
-                ", tipo='" + tipo + '\'' +
+                ", nombre='" + nombre + '\'' +
                 ", precio=" + precio +
+                ", g_inicial=" + g_inicial +
                 '}';
     }
-
 }

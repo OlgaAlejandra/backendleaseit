@@ -2,14 +2,12 @@ package com.leaseit.leasing.controller;
 
 import java.util.List;
 
+import com.leaseit.leasing.entities.User;
+import com.leaseit.leasing.exeption.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.leaseit.leasing.entities.Operation;
 import com.leaseit.leasing.repository.ActivoRepository;
@@ -28,10 +26,34 @@ public class OperationController {
 	 @Autowired
 	 private ActivoRepository activoRepository;
 	 
-	 @GetMapping("operacion")
+	 @GetMapping("/operacion")
 	 public ResponseEntity<List<Operation>> getAllOperations(){
 		 List<Operation> operaciones = operationRepository.findAll();
 		 return new ResponseEntity<List<Operation>>(operaciones,HttpStatus.OK);
 	 }
+	@GetMapping("/operacion/{id}")
+	public ResponseEntity<Operation> getOperationId(Long id){
+		Operation operacion = operationRepository.findById(id).
+				orElseThrow(()-> new ResourceNotFoundException("Not found user with id="+id));;
+		return new ResponseEntity<Operation>(operacion,HttpStatus.OK);
+	}
+
+	@PostMapping("/operations")
+	public ResponseEntity<Operation> createOperation(@RequestBody Operation operacion){
+		Operation newOperation= operationRepository.save(
+				new Operation(
+						operacion.getUser(),
+						operacion.getActivo(),
+						operacion.getArrendador(),
+						operacion.isPgp_flag(),
+						operacion.getPgt_count(),
+						operacion.isPgt_flag(),
+						operacion.getPgt_count(),
+						operacion.getP_financiado(),
+						operacion.getTiempo_o(),
+						operacion.getFrecuencia()
+						));
+		return new ResponseEntity<Operation>(newOperation,HttpStatus.CREATED);
+	}
 	 
 }

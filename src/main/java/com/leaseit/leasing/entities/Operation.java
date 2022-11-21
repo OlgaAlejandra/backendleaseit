@@ -1,13 +1,6 @@
 package com.leaseit.leasing.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -18,36 +11,39 @@ public class Operation {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@OneToMany(fetch = FetchType.LAZY)
-	@JsonIgnoreProperties( {"hibernateLazyInitializer", "handler"})
-	private User user;
-	
-	@ManyToOne(fetch= FetchType.LAZY)
-    @JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
-	private Arrendador arrendador;
-	
-	@ManyToOne(fetch= FetchType.LAZY)
-    @JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
-	private Activo activo;
-	
-	@ManyToOne(fetch= FetchType.LAZY)
-    @JsonIgnoreProperties ( {"hibernateLazyInitializer", "handler"})
-	private Activo TEP;
-	
-    private String moneda;
-    
-    private Long number;
-    
-    private Long amortizacion; 
-    
-    private boolean p_incluido;
-    
-    private Long p_gracia;
 
-    private Long n_ptype;
-    
-    private String p_type;
+	@OneToOne
+	@MapsId
+	private User user;
+
+	@OneToOne
+	@MapsId
+	private Activo activo;
+
+	@OneToOne
+	@MapsId
+	private Arrendador arrendador;
+
+	@Column(name = "pgp_flag")
+	private boolean pgp_flag;
+
+	@Column(name = "pgp_count")
+	private String pgp_count;
+
+	@Column(name = "pgt_flag")
+	private boolean pgt_flag;
+
+	@Column(name = "pgpt_count")
+	private String pgt_count;
+
+	@Column(name = "p_financiado")
+	private Long p_financiado;
+
+	@Column(name = "tiempo_o")
+	private Long tiempo_o;
+
+	@Column(name = "frecuencia_p")
+	private Long frecuencia;
 
 	public Long getId() {
 		return id;
@@ -65,14 +61,6 @@ public class Operation {
 		this.user = user;
 	}
 
-	public Arrendador getArrendador() {
-		return arrendador;
-	}
-
-	public void setArrendador(Arrendador arrendador) {
-		this.arrendador = arrendador;
-	}
-
 	public Activo getActivo() {
 		return activo;
 	}
@@ -81,97 +69,101 @@ public class Operation {
 		this.activo = activo;
 	}
 
-	public Activo getTEP() {
-		return TEP;
+	public Arrendador getArrendador() {
+		return arrendador;
 	}
 
-	public void setTEP(Activo tEP) {
-		TEP = tEP;
+	public void setArrendador(Arrendador arrendador) {
+		this.arrendador = arrendador;
 	}
 
-	public String getMoneda() {
-		return moneda;
+	public boolean isPgp_flag() {
+		return pgp_flag;
 	}
 
-	public void setMoneda(String moneda) {
-		this.moneda = moneda;
+	public void setPgp_flag(boolean pgp_flag) {
+		this.pgp_flag = pgp_flag;
 	}
 
-	public Long getNumber() {
-		return number;
+	public String getPgp_count() {
+		return pgp_count;
 	}
 
-	public void setNumber(Long number) {
-		this.number = number;
+	public void setPgp_count(String pgp_count) {
+		this.pgp_count = pgp_count;
 	}
 
-	public Long getAmortizacion() {
-		return amortizacion;
+	public boolean isPgt_flag() {
+		return pgt_flag;
 	}
 
-	public void setAmortizacion(Long amortizacion) {
-		this.amortizacion = amortizacion;
+	public void setPgt_flag(boolean pgt_flag) {
+		this.pgt_flag = pgt_flag;
 	}
 
-	public boolean isP_incluido() {
-		return p_incluido;
+	public String getPgt_count() {
+		return pgt_count;
 	}
 
-	public void setP_incluido(boolean p_incluido) {
-		this.p_incluido = p_incluido;
+	public void setPgt_count(String pgt_count) {
+		this.pgt_count = pgt_count;
 	}
 
-	public Long getP_gracia() {
-		return p_gracia;
+	public Long getP_financiado() {
+		return p_financiado;
 	}
 
-	public void setP_gracia(Long p_gracia) {
-		this.p_gracia = p_gracia;
+	public void setP_financiado(Long p_financiado) {
+		this.p_financiado = p_financiado;
 	}
 
-	public Long getN_ptype() {
-		return n_ptype;
+	public Long getTiempo_o() {
+		return tiempo_o;
 	}
 
-	public void setN_ptype(Long n_ptype) {
-		this.n_ptype = n_ptype;
+	public void setTiempo_o(Long tiempo_o) {
+		this.tiempo_o = tiempo_o;
 	}
 
-	public String getP_type() {
-		return p_type;
+	public Long getFrecuencia() {
+		return frecuencia;
 	}
 
-	public void setP_type(String p_type) {
-		this.p_type = p_type;
+	public void setFrecuencia(Long frecuencia) {
+		this.frecuencia = frecuencia;
+	}
+
+	public Operation(User user, Activo activo, Arrendador arrendador, boolean pgp_flag, String pgp_count, boolean pgt_flag, String pgt_count, Long p_financiado, Long tiempo_o, Long frecuencia) {
+		this.user = user;
+		this.activo = activo;
+		this.arrendador = arrendador;
+		this.pgp_flag = pgp_flag;
+		this.pgp_count = pgp_count;
+		this.pgt_flag = pgt_flag;
+		this.pgt_count = pgt_count;
+		this.p_financiado = p_financiado;
+		this.tiempo_o = tiempo_o;
+		this.frecuencia = frecuencia;
+	}
+
+	public Operation(){
+
 	}
 
 	@Override
 	public String toString() {
-		return "Operation [id=" + id + ", user=" + user + ", arrendador=" + arrendador + ", activo=" + activo + ", TEP="
-				+ TEP + ", moneda=" + moneda + ", number=" + number + ", amortizacion=" + amortizacion + ", p_incluido="
-				+ p_incluido + ", p_gracia=" + p_gracia + ", n_ptype=" + n_ptype + ", p_type=" + p_type + "]";
+		return "Operation{" +
+				"id=" + id +
+				", user=" + user +
+				", activo=" + activo +
+				", arrendador=" + arrendador +
+				", pgp_flag=" + pgp_flag +
+				", pgp_count='" + pgp_count + '\'' +
+				", pgt_flag=" + pgt_flag +
+				", pgt_count='" + pgt_count + '\'' +
+				", p_financiado=" + p_financiado +
+				", tiempo_o=" + tiempo_o +
+				", frecuencia=" + frecuencia +
+				'}';
 	}
-
-	public Operation(Long id, User user, Arrendador arrendador, Activo activo, Activo tEP, String moneda, Long number,
-			Long amortizacion, boolean p_incluido, Long p_gracia, Long n_ptype, String p_type) {
-		super();
-		this.id = id;
-		this.user = user;
-		this.arrendador = arrendador;
-		this.activo = activo;
-		TEP = tEP;
-		this.moneda = moneda;
-		this.number = number;
-		this.amortizacion = amortizacion;
-		this.p_incluido = p_incluido;
-		this.p_gracia = p_gracia;
-		this.n_ptype = n_ptype;
-		this.p_type = p_type;
-	}
-
-	public Operation() {
-
-	}
-
-   
 }

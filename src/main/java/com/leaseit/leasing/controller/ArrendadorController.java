@@ -38,7 +38,10 @@ public class ArrendadorController {
         Arrendador newArrendador= arrendadorRepository.save(
                 new Arrendador(
                         arrendador.getNombre(),
-                        arrendador.getTEP()));
+                        arrendador.getTEP(),
+                        arrendador.getP_recompra(),
+                        arrendador.getComision(),
+                        arrendador.getS_riesgo()));
         return new ResponseEntity<Arrendador>(newArrendador,HttpStatus.CREATED);
     }
     //PUT=>http:localthost:8080/api/users/1
