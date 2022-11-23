@@ -46,12 +46,13 @@ public class OperationController {
 						operacion.getActivo(),
 						operacion.getArrendador(),
 						operacion.isPgp_flag(),
-						operacion.getPgt_count(),
+						operacion.getPgp_count(),
 						operacion.isPgt_flag(),
 						operacion.getPgt_count(),
 						operacion.getP_financiado(),
 						operacion.getTiempo_o(),
-						operacion.getFrecuencia()
+						operacion.getFrecuencia(),
+						operacion.getMoneda()
 						));
 		return new ResponseEntity<Operation>(newOperation,HttpStatus.CREATED);
 	}

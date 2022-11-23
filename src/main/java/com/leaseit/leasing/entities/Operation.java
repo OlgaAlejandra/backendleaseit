@@ -13,28 +13,25 @@ public class Operation {
 	private Long id;
 
 	@OneToOne
-	@MapsId
 	private User user;
 
 	@OneToOne
-	@MapsId
 	private Activo activo;
 
 	@OneToOne
-	@MapsId
 	private Arrendador arrendador;
 
 	@Column(name = "pgp_flag")
 	private boolean pgp_flag;
 
 	@Column(name = "pgp_count")
-	private String pgp_count;
+	private Long pgp_count;
 
 	@Column(name = "pgt_flag")
 	private boolean pgt_flag;
 
-	@Column(name = "pgpt_count")
-	private String pgt_count;
+	@Column(name = "pgt_count")
+	private Long pgt_count;
 
 	@Column(name = "p_financiado")
 	private Long p_financiado;
@@ -44,6 +41,9 @@ public class Operation {
 
 	@Column(name = "frecuencia_p")
 	private Long frecuencia;
+
+	@Column(name="moneda")
+	private String moneda;
 
 	public Long getId() {
 		return id;
@@ -85,11 +85,11 @@ public class Operation {
 		this.pgp_flag = pgp_flag;
 	}
 
-	public String getPgp_count() {
+	public Long getPgp_count() {
 		return pgp_count;
 	}
 
-	public void setPgp_count(String pgp_count) {
+	public void setPgp_count(Long pgp_count) {
 		this.pgp_count = pgp_count;
 	}
 
@@ -101,11 +101,11 @@ public class Operation {
 		this.pgt_flag = pgt_flag;
 	}
 
-	public String getPgt_count() {
+	public Long getPgt_count() {
 		return pgt_count;
 	}
 
-	public void setPgt_count(String pgt_count) {
+	public void setPgt_count(Long pgt_count) {
 		this.pgt_count = pgt_count;
 	}
 
@@ -133,7 +133,15 @@ public class Operation {
 		this.frecuencia = frecuencia;
 	}
 
-	public Operation(User user, Activo activo, Arrendador arrendador, boolean pgp_flag, String pgp_count, boolean pgt_flag, String pgt_count, Long p_financiado, Long tiempo_o, Long frecuencia) {
+	public String getMoneda() {
+		return moneda;
+	}
+
+	public void setMoneda(String moneda) {
+		this.moneda = moneda;
+	}
+
+	public Operation(User user, Activo activo, Arrendador arrendador, boolean pgp_flag, Long pgp_count, boolean pgt_flag, Long pgt_count, Long p_financiado, Long tiempo_o, Long frecuencia, String moneda) {
 		this.user = user;
 		this.activo = activo;
 		this.arrendador = arrendador;
@@ -144,6 +152,7 @@ public class Operation {
 		this.p_financiado = p_financiado;
 		this.tiempo_o = tiempo_o;
 		this.frecuencia = frecuencia;
+		this.moneda = moneda;
 	}
 
 	public Operation(){
@@ -164,6 +173,7 @@ public class Operation {
 				", p_financiado=" + p_financiado +
 				", tiempo_o=" + tiempo_o +
 				", frecuencia=" + frecuencia +
+				", moneda='" + moneda + '\'' +
 				'}';
 	}
 }

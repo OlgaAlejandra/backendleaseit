@@ -41,7 +41,7 @@ public class ActivoController {
                 new Activo(
                         activo.getNombre(),
                         activo.getPrecio(),
-                        activo.getPrecio()));
+                        activo.getG_inicial()));
         return new ResponseEntity<Activo>(newActivo,HttpStatus.CREATED);
     }
     //PUT=>http:localthost:8080/api/users/1

@@ -41,7 +41,9 @@ public class ArrendadorController {
                         arrendador.getTEP(),
                         arrendador.getP_recompra(),
                         arrendador.getComision(),
-                        arrendador.getS_riesgo()));
+                        arrendador.getS_riesgo(),
+                        arrendador.getTasa_type(),
+                        arrendador.getT_tasa()));
         return new ResponseEntity<Arrendador>(newArrendador,HttpStatus.CREATED);
     }
     //PUT=>http:localthost:8080/api/users/1
@@ -58,7 +60,7 @@ public class ArrendadorController {
                 HttpStatus.OK);
     }
 
-    @DeleteMapping("/arrendadores/{id}")
+    @DeleteMapping("/arrendadores")
     public ResponseEntity<HttpStatus> deleteArrendador(@PathVariable("id") Long id){
         arrendadorRepository.deleteById(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
