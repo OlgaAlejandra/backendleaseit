@@ -26,12 +26,12 @@ public class OperationController {
 	 @Autowired
 	 private ActivoRepository activoRepository;
 	 
-	 @GetMapping("/operacion")
+	 @GetMapping("/operations")
 	 public ResponseEntity<List<Operation>> getAllOperations(){
 		 List<Operation> operaciones = operationRepository.findAll();
 		 return new ResponseEntity<List<Operation>>(operaciones,HttpStatus.OK);
 	 }
-	@GetMapping("/operacion/{id}")
+	@GetMapping("/operations/{id}")
 	public ResponseEntity<Operation> getOperationId(Long id){
 		Operation operacion = operationRepository.findById(id).
 				orElseThrow(()-> new ResourceNotFoundException("Not found user with id="+id));;
