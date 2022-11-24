@@ -32,7 +32,7 @@ public class OperationController {
 		 return new ResponseEntity<List<Operation>>(operaciones,HttpStatus.OK);
 	 }
 	@GetMapping("/operations/{id}")
-	public ResponseEntity<Operation> getOperationId(Long id){
+	public ResponseEntity<Operation> getOperationId(@PathVariable("id") Long id){
 		Operation operacion = operationRepository.findById(id).
 				orElseThrow(()-> new ResourceNotFoundException("Not found user with id="+id));;
 		return new ResponseEntity<Operation>(operacion,HttpStatus.OK);
